@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DeepWorkController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::match(['get','post'],'/create_Deep_work_session',[DeepWorkController::class,'createDeepSession'])->name('create.DeepWorkSession');
 Route::get('/view_Deep_work_sessions',[DeepWorkController::class,'viewDeepWorkSessions'])->name('view.DeepWorkSession');
+Route::post('/start_Deep_work_session',[DeepWorkController::class,'startDeepWorkSession'])->name('start.DeepWorkSession');
