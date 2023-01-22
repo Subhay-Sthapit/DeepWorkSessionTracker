@@ -23,7 +23,7 @@
                     <td>{{$deepSession->status}}</td>
                     <td>
                         <i class="fa-solid fa-circle-play"></i>
-                        <button class="btn-success" style="background-color: #4db61b; border-radius: 25%; width: 70px"; type="button" href="#">
+                        <button class="btn btn-success btn-submit" style="background-color: #4db61b; border-radius: 25%; width: 70px;" type="button" onclick="startSession({{$deepSession->id}});">
                             Start</button>
                     </td>
                 </tr>
@@ -31,4 +31,31 @@
             </tbody>
         </table>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function startSession(id){
+
+            e.preventDefault();
+
+            var name = $("input[name=name]").val();
+            var password = $("input[name=password]").val();
+            var email = $("input[name=email]").val();
+
+            $.ajax({
+                type:'POST',
+                url:"{{ route('start.DeepWorkSession') }}",
+                data:{name:name, password:password, email:email},
+                success:function(data){
+                    alert(data.success);
+                }
+            });
+        }
+    </script>
 @endsection
