@@ -47,13 +47,13 @@ class DeepWorkController extends Controller
         return view('viewDeepWorkSessions')->with(compact('deepSessions'));
     }
 
-    public function updateSession($id){
+    public function startDeepWorkSession($id){
         $deepSession = $this->deepWorkRepository->findDeepWorkSessionWithId($id);
         $currentDateTime = Carbon::now()->toDateTimeString();
         $data['status'] = 'Started';
         $data['actual_start_time'] = $currentDateTime;
-        $startedDeepSession = $this->deepWorkRepository->startDeepWorkSession($deepSession,$data); // todo: need to do error handling
-
+        $startedDeepSession = $this->deepWorkRepository->startDeepWorkSession($deepSession,$data);
+        // todo: need to do error handling
         return $startedDeepSession;
     }
 }
